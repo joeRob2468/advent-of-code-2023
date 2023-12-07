@@ -10,6 +10,7 @@ const part1 = (rawInput) => {
   let distances = input[1].match(numberPattern);
   let successRanges = [];
 
+  // create array of races
   for (let i=0; i<times.length; i++) {
     races.push({
       time: times[i],
@@ -17,9 +18,10 @@ const part1 = (rawInput) => {
     });
   }
 
-  for (let raceIndex = 0; raceIndex < times.length; raceIndex++) {
-    let time = races[raceIndex].time;
-    let distance = races[raceIndex].distance;
+  // for each race, calculate minimum possible speed, maximum possible speed, and number of solutions
+  for (let i = 0; i < races.length; i++) {
+    let time = races[i].time;
+    let distance = races[i].distance;
     let minSpeed, maxSpeed;
 
     for (let currentSpeed=1; currentSpeed<=time; currentSpeed++) {
@@ -40,26 +42,25 @@ const part1 = (rawInput) => {
     });
   }
 
-  let result = successRanges.reduce((accumulator, range) => accumulator * range.solutions, 1);
-  return result;
+  return successRanges.reduce((accumulator, range) => accumulator * range.solutions, 1);
 };
 
 const part2 = (rawInput) => {
   const input = parseInput(rawInput);
   const numberPattern = /[0-9]+/g;
   let races = [];
-  let times = input[0].match(numberPattern);
-  let distances = input[1].match(numberPattern);
   let successRanges = [];
 
+  // create array of races
   races.push({
-    time: parseInt(times.reduce((accumulator, value) => accumulator + value, ''), 10),
-    distance: parseInt(distances.reduce((accumulator, value) => accumulator + value, ''), 10),
+    time: parseInt(input[0].match(numberPattern).reduce((accumulator, value) => accumulator + value, ''), 10),
+    distance: parseInt(input[1].match(numberPattern).reduce((accumulator, value) => accumulator + value, ''), 10),
   });
 
-  for (let raceIndex = 0; raceIndex < races.length; raceIndex++) {
-    let time = races[raceIndex].time;
-    let distance = races[raceIndex].distance;
+  // for each race, calculate minimum possible speed, maximum possible speed, and number of solutions
+  for (let i = 0; i < races.length; i++) {
+    let time = races[i].time;
+    let distance = races[i].distance;
     let minSpeed, maxSpeed;
 
     for (let currentSpeed=1; currentSpeed<=time; currentSpeed++) {
@@ -81,8 +82,7 @@ const part2 = (rawInput) => {
     });
   }
 
-  let result = successRanges.reduce((accumulator, range) => accumulator * range.solutions, 1);
-  return result;
+  return successRanges.reduce((accumulator, range) => accumulator * range.solutions, 1);
 };
 
 run({
