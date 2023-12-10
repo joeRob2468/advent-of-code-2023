@@ -1,6 +1,5 @@
 import { assert } from "console";
 import run from "aocrunner";
-import { types } from "util";
 
 const parseInput = (rawInput) => rawInput.trim().split('\n');
 
@@ -206,9 +205,8 @@ const part2 = (rawInput) => {
       return rank;
     });
   }
+  hands = handGroups.flat(); // recreate hands array with sorted values
 
-  // recreate hands array with sorted values
-  hands = handGroups.flat();
   return hands.reduce((accumulator, hand, index) => accumulator + (hand.bid * (hands.length - index)), 0);
 };
 
